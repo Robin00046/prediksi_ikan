@@ -31,10 +31,10 @@
                 foreach ($prediksi as $prediksi) : ?>
                     <tr>
                         <td><?= $no++ ?></td>
-                        <td>Rp. <?= number_format($prediksi->bulan1,2,',','.'); ?></td>
-                        <td>Rp. <?= number_format($prediksi->bulan2,2,',','.'); ?></td>
-                        <td>Rp. <?= number_format($prediksi->bulan3,2,',','.'); ?></td>
-                        <td>Rp. <?= number_format($prediksi->hasil,2,',','.'); ?></td>
+                        <td><?= $prediksi->bulan1; ?></td>
+                        <td><?= $prediksi->bulan2; ?></td>
+                        <td><?= $prediksi->bulan3; ?></td>
+                        <td><?= $prediksi->hasil; ?></td>
                         <td>
                             <a class="btn btn-warning" href="<?= base_url() . 'prediksi/ubah/' . $prediksi->id_prediksi  ?>"><i class="bi bi-pencil"></i></a>
                             <a class="btn btn-danger" onclick="return confirm('Yakin ? ');" href="<?= base_url() . 'prediksi/hapus/' . $prediksi->id_prediksi  ?>" class="btn btn-small text-danger"><i class="bi bi-trash"></i></a>

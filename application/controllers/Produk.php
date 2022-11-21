@@ -46,8 +46,8 @@ class Produk extends CI_Controller
     public function ubah($id)
     {
         $data['judul'] = "Halaman ubah";
-        $data['produk'] = $this->M_Produk->getproduk($id);
-        // var_dump($data->id_produk);
+        $data['produk'] = $this->M_Produk->getproduk($id)->row_array();
+        // var_dump($data['produk']);
         $this->form_validation->set_rules('nama_produk', 'nama_produk', 'required');
         $this->form_validation->set_rules('jenis_produk', 'jenis_produk', 'required');
         $this->form_validation->set_rules('harga', 'harga', 'required');

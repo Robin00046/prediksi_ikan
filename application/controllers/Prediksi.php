@@ -46,4 +46,28 @@ class Prediksi extends CI_Controller
         $this->session->set_flashdata('flash', 'Dihapus');
         redirect('prediksi');
     }
+    public function ubah($id)
+    {
+        $data['judul'] = "Halaman Ubah Prediksi";
+        $data['prediksi'] = $this->M_Prediksi->getprediksi($id)->row_array();
+        $data['user'] = $this->M_User->get_data();
+        // var_dump($data['produk']);
+        $this->form_validation->set_rules('bulan1', 'bulan1', 'required');
+        $this->form_validation->set_rules('bulan2', 'bulan2', 'required');
+        $this->form_validation->set_rules('bulan3', 'bulan3', 'required');
+        $this->form_validation->set_rules('hasil', 'hasil', 'required');
+        $this->form_validation->set_rules('id_user', 'id_user', 'required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $this->load->view('templates/main', $data);
+            $this->load->view('prediksi/v_ubah', $data);
+            $this->load->view('templates/footer');
+            $this->load->view('templates/end');
+        } else {
+            $this->M_Prediksi->ubahprediksi();
+            
+            $this->session->set_flashdata('flash', 'Diubah');
+            redirect('prediksi');
+        }
+    }
 }

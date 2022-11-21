@@ -2,7 +2,6 @@
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.rawgit.com/igorescobar/jQuery-Mask-Plugin/1ef022ab/dist/jquery.mask.min.js"></script>
 <!-- Template Main JS File -->
 <!-- Vendor JS Files -->
@@ -18,12 +17,6 @@
     $(document).ready(function() {
         $('#datatable').DataTable();
     });
-</script>
-<script type="text/javascript">
-	$(document).ready(function(){
-	    // Format mata uang.
-	    $( '.uang' ).mask('0.000.000.000', {reverse: true});
-	})
 </script>
 <script>
     function nilai_rata_rata() {

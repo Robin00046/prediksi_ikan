@@ -10,7 +10,7 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nama produk</label>
                             <select class="form-control" id="id_barang" name="id_produk">
-                                <option selected="0">select..</option>
+                                <option selected="0">Pilih Nama Produk</option>
                                 <?php foreach ($tbl_produk as $op) : ?>
                                     <option value="<?php echo $op->id_produk; ?>" data-price="<?php echo $op->harga; ?>"> <?php echo $op->nama_produk; ?></option>
                                 <?php endforeach; ?>
@@ -19,19 +19,19 @@
                         <div class="form-group">
                             <label for="exampleInputPassword1">Nama User</label>
                             <select class="form-control" id="id_user" name="id_user">
-                                <option selected="0">select..</option>
+                                <option selected="0">Pilih Nama User</option>
                                 <?php foreach ($user as $op) : ?>
                                     <option value="<?php echo $op->id_user; ?>"> <?php echo $op->nama; ?></option>
                                 <?php endforeach; ?>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="jumlah_barang">jumlah_barang</label>
+                            <label for="jumlah_barang">Jumlah Barang</label>
                             <input type="number" name="jumlah_barang" class="form-control" id="jumbarang">
                             <small class="form-text text-danger"><?= form_error('jumlah_barang'); ?></small>
                         </div>
                         <div class="form-group">
-                            <label for="tanggal">tanggal</label>
+                            <label for="tanggal">Tanggal</label>
                             <input type="date" name="tanggal" class="form-control" id="tanggal">
                             <small class="form-text text-danger"><?= form_error('tanggal'); ?></small>
                         </div>

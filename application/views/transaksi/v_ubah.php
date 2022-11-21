@@ -35,12 +35,12 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="jumlah_barang">jumlah_barang</label>
+                            <label for="jumlah_barang">Jumlah Barang</label>
                             <input type="number" name="jumlah_barang" class="form-control" id="jumbarang" value="<?= $transaksi['jumlah_barang']; ?>" >
                             <small class="form-text text-danger"><?= form_error('jumlah_barang'); ?></small>
                         </div>
                         <div class="form-group">
-                            <label for="tanggal">tanggal</label>
+                            <label for="tanggal">Tanggal</label>
                             <input type="date" name="tanggal" class="form-control" id="tanggal" value="<?= $transaksi['tanggal']; ?>">
                             <small class="form-text text-danger"><?= form_error('tanggal'); ?></small>
                         </div>

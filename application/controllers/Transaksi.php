@@ -31,7 +31,7 @@ class Transaksi extends CI_Controller
         $this->form_validation->set_rules('jumlah_barang', 'jumlah_barang', 'required');
         $this->form_validation->set_rules('total_harga', 'total_harga', 'required');
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('templates/main');
+            $this->load->view('templates/main',$data);
             $this->load->view('transaksi/v_tambah', $data);
             $this->load->view('templates/footer');
             $this->load->view('templates/end');
@@ -54,7 +54,7 @@ class Transaksi extends CI_Controller
     public function ubah($id)
     {
         $data['judul'] = "Halaman ubah";
-        $data['transaksi'] = $this->M_Transaksi->gettransaksi($id);
+        $data['transaksi'] = $this->M_Transaksi->gettransaksi($id)->row_array();
         $data['tbl_produk'] = $this->M_Produk->get_data();
         $data['user'] = $this->M_User->get_data();
         $this->form_validation->set_rules('id_produk', 'id_produk', 'required');
