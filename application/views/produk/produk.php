@@ -45,5 +45,42 @@
                 <?php endforeach ?>
             </tbody>
         </table>
+        <div class="container">
+    <canvas id="myChart"></canvas>
+    </div>
+ 
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script type="text/javascript">
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: [
+          <?php
+            if (count($tbl_produk)>0) {
+              foreach ($tbl_produk as $data) {
+                echo "'" .$data->nama_produk ."',";
+              }
+            }
+          ?>
+        ],
+        datasets: [{
+            label: 'Jumlah Stok',
+            backgroundColor: ['#343090', '#5f59f7', '#6592fd', '#44c2fd', '#8c61ff'],
+            borderColor: '#93C3D2',
+            data: [
+              <?php
+                if (count($tbl_produk)>0) {
+                   foreach ($tbl_produk as $data) {
+                    echo $data->total_stok . ", ";
+                  }
+                }
+                    ?>
+                ]
+            }]
+        },
+        });
+ 
+  </script>
     </div>
 </section>
