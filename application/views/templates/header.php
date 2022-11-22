@@ -17,7 +17,7 @@
                         <span class="d-none d-md-block dropdown-toggle ps-2">K. Anderson</span>
                     </a>End Profile Iamge Icon -->
 
-                    <a class="dropdown-item d-flex align-items-center" href="#">
+                    <a class="dropdown-item d-flex align-items-center" href=<?php echo base_url('login/logout'); ?>>
                         <i class="bi bi-box-arrow-right"></i>
                         <span>Sign Out</span>
                     </a>

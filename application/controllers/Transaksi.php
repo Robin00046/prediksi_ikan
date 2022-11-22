@@ -10,6 +10,9 @@ class Transaksi extends CI_Controller
         $this->load->model('M_Produk');
         $this->load->model('M_User');
         $this->load->library('form_validation');
+        if($this->session->userdata('status') != "login"){
+			redirect(base_url("login"));
+		}
     }
     public function index()
     {

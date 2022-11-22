@@ -28,13 +28,13 @@
                                                 <?php
                                                     if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
                                                         echo '<a href="' . base_url('grafik') . '" class="btn btn-info">RESET</a>';
-                                                    ?>         
+                                                ?>         
                                                    
-                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        </form>
+                                                </form>
+                                            </div>
+                                       </div>
+                                   </div>
+                               </div>
                                 <table class="table table-bordered" width="100%" cellspacing="0">
                                     <thead>
                                         <tr align=center>

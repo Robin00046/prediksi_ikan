@@ -26,12 +26,11 @@ include('templates/head.php')
                                         <h5 class="card-title text-center pb-0 fs-4">Silahkan Login</h5>
                                     </div>
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    <form action="<?php echo base_url('login/aksi_login'); ?>" method="post" class="row g-3 needs-validation" novalidate>
 
                                         <div class="col-12">
                                             <label for="yourUsername" class="form-label">Username</label>
                                             <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
                                                 <input type="text" name="username" class="form-control" id="yourUsername" required>
                                                 <div class="invalid-feedback">Please enter your username.</div>
                                             </div>
@@ -46,6 +45,15 @@ include('templates/head.php')
                                         <div class="col-12">
                                             <button class="btn btn-primary w-100" type="submit">Login</button>
                                         </div>
+                                        <?php
+										if ($this->session->flashdata('pesan') <> '') {
+										?>
+											<div class="alert alert-dismissible alert-danger">
+												<?php echo $this->session->flashdata('pesan'); ?>
+											</div>
+										<?php
+										}
+										?>
                                     </form>
                                 </div>
                             </div>
