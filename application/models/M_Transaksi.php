@@ -59,6 +59,14 @@ class M_transaksi extends CI_Model
         $this->db->join('data_produk', 'data_produk.id_produk = transaksi.id_produk');
         $this->db->join('user', 'user.id_user = transaksi.id_user');
         $this->db->where('DATE(tanggal) BETWEEN ' . $tgl_awal . ' AND ' . $tgl_akhir); // Tambahkan where tanggal nya
+        
+        return $this->db->get('transaksi')->result(); // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
+    }
+    public function grafik($nama_produk)
+    {
+        $this->db->join('data_produk', 'data_produk.id_produk = transaksi.id_produk');
+        $this->db->join('user', 'user.id_user = transaksi.id_user');
+        $this->db->where("nama_produk",$nama_produk);
 
         return $this->db->get('transaksi')->result(); // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
     }
