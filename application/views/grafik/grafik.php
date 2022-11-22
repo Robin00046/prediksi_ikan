@@ -43,7 +43,7 @@
                                             <td>Nama</td>
                                             <td>Jumlah Barang</td>
                                             <td>Total Harga</td>
-                                            <td>Tanggal</td>
+                                            <td>Bulan</td>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -53,7 +53,7 @@
                                         } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
                                             $no = 1;
                                             foreach ($grafik as $data) { // Looping hasil data grafik
-                                                $tanggal = date('d-m-Y', strtotime($data->tanggal)); // Ubah format tanggal jadi dd-mm-yyyy
+                                                $tanggal = date('F Y', strtotime($data->tanggal)); // Ubah format tanggal jadi dd-mm-yyyy
                                                 
                                                 echo "<tr>";
                                                 echo "<td style='width: 80px;'>" . $no++ . "</td>";
@@ -83,7 +83,8 @@
           <?php
             if (count($grafik)>0) {
               foreach ($grafik as $data) {
-                echo "'" .$data->tanggal ."',";
+                $tanggal = date('F Y', strtotime($data->tanggal));
+                echo "'" .$tanggal ."',";
               }
             }
           ?>

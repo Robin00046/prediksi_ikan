@@ -29,13 +29,14 @@
             <tbody>
                 <?php
                 $no = 1;
-                foreach ($transaksi as $transaksi) : ?>
+                foreach ($transaksi as $transaksi) : 
+                    $tanggal = date('F Y', strtotime($transaksi->tanggal));?>
                     <tr>
                         <td><?= $no++ ?></td>
                         <td><?= $transaksi->nama_produk; ?></td>
                         <td><?= $transaksi->nama; ?></td>
                         <td><?= $transaksi->jumlah_barang; ?></td>
-                        <td><?= $transaksi->tanggal; ?></td>
+                        <td><?= $tanggal; ?></td>
                         <td>Rp. <?= number_format($transaksi->total_harga,2,',','.'); ?></td>
                         <td>
                             <a class="btn btn-warning" href="<?= base_url() . 'transaksi/ubah/' . $transaksi->id_transaksi  ?>"><i class="bi bi-pencil"></i></a>
