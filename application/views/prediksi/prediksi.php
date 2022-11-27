@@ -8,39 +8,62 @@
                     </div>
                 </div>
             </div>
-        <?php endif; ?>
-        <div class="row mb-3">
-            <div class="col-md-6">
-                <a href="<?= base_url('prediksi/tambah') ?>" class="btn btn-primary">Tambah Data</a>
+            <?php endif; ?>
+            <div class="text-center h3">
+                                        <?php echo $label ?>
+                                    </div>
+        <div class="row">
+            <div class="col-sm-4 col-md-3">
+                <div class="form-group">
+                    <form method="get" action="<?php echo base_url("prediksi")?>">
+                        
+                        <select class="form-select" id="nama_produk" name="nama_produk">
+                            <option selected="0">Pilih Jenis Ikan</option>
+                            <?php foreach ($tbl_produk as $op) : ?>
+                                <option value="<?php echo $op->nama_produk; ?>"> <?php echo $op->nama_produk; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+            
+                    <input type="submit" name="filter" class="btn btn-primary mt-3 mb-3" value="Cari"> 
+                    <?php
+                        if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
+                            echo '<a href="' . base_url('prediksi') . '" class="btn btn-info">RESET</a>';
+                    ?>
+                    </form>
+                </div>
             </div>
         </div>
         <table id="datatable" class="display" style="width:100%">
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Bulan 1</th>
-                    <th>Bulan 2</th>
-                    <th>Bulan 3</th>
-                    <th>Hasil Prediksi</th>
-                    <th>Aksi</th>
+                    <th>Nama Produk</th>
+                    <th>Jumlah Penjualan</th>
+                    <th>Bulan Prediksi</th>
+                    <th>Hasil Prediksi 3 Bulan</th>
+                    <th>Hasil Prediksi 6 Bulan</th>
                 </tr>
             </thead>
             <tbody>
-                <?php
-                $no = 1;
-                foreach ($prediksi as $prediksi) : ?>
-                    <tr>
-                        <td><?= $no++ ?></td>
-                        <td><?= $prediksi->bulan1; ?></td>
-                        <td><?= $prediksi->bulan2; ?></td>
-                        <td><?= $prediksi->bulan3; ?></td>
-                        <td><?= $prediksi->hasil; ?></td>
-                        <td>
-                            <a class="btn btn-warning" href="<?= base_url() . 'prediksi/ubah/' . $prediksi->id_prediksi  ?>"><i class="bi bi-pencil"></i></a>
-                            <a class="btn btn-danger" onclick="return confirm('Yakin ? ');" href="<?= base_url() . 'prediksi/hapus/' . $prediksi->id_prediksi  ?>" class="btn btn-small text-danger"><i class="bi bi-trash"></i></a>
-                        </td>
-                    </tr>
-                <?php endforeach ?>
+            <?php
+                if (empty($prediksi)) { // Jika data tidak ada
+                    echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
+                } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
+                    $no = 1;
+                    foreach ($prediksi as $data) { // Looping hasil data filter
+                        $tanggal = date('F Y', strtotime($data->tanggal)); // Ubah format tanggal jadi dd-mm-yyyy
+                        
+                        echo "<tr>";
+                        echo "<td>" . $no++ . "</td>";
+                        echo "<td>" . $data->nama_produk . "</td>";
+                        echo "<td>" . $data->jumlah_barang . "</td>";
+                        echo "<td>" . $tanggal . "</td>";
+                        echo "<td>" . $data->prediksi . "</td>";
+                        echo "<td>" . $data->prediksin . "</td>";
+                        echo "</tr>";
+                    }
+                }
+                ?>
             </tbody>
         </table>
     </div>

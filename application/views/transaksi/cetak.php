@@ -43,12 +43,12 @@
         </tr>
 
         <?php
-        if (empty($transaksi)) { // Jika data tidak ada
+        if (empty($filter)) { // Jika data tidak ada
             echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
         } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
             $no = 1;
-            foreach ($transaksi as $data) { // Looping hasil data transaksi
-                $tanggal = date('d-m-Y', strtotime($data->tanggal)); // Ubah format tanggal jadi dd-mm-yyyy
+            foreach ($filter as $data) { // Looping hasil data filter
+                $tanggal = date('F Y', strtotime($data->tanggal)); // Ubah format tanggal jadi dd-mm-yyyy
 
                 echo "<tr align=center>";
                 echo "<td>" . $no++ . "</td>";

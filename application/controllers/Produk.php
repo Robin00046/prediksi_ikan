@@ -16,7 +16,8 @@ class Produk extends CI_Controller
     {
         $data['tbl_produk'] = $this->M_Produk->get_data();
         $data['judul'] = 'Halaman Produk';
-        $this->load->view('templates/main', $data);
+        $this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
         $this->load->view('produk/produk', $data);
         $this->load->view('templates/footer');
         $this->load->view('templates/end');
@@ -30,7 +31,8 @@ class Produk extends CI_Controller
         $this->form_validation->set_rules('satuan', 'satuan', 'required');
         $this->form_validation->set_rules('total_stok', 'total_stok', 'required');
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('templates/main', $data);
+            $this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
             $this->load->view('produk/v_tambah');
             $this->load->view('templates/footer');
             $this->load->view('templates/end');
@@ -58,7 +60,8 @@ class Produk extends CI_Controller
         $this->form_validation->set_rules('total_stok', 'total_stok', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('templates/main', $data);
+            $this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
             $this->load->view('produk/v_ubah', $data);
             $this->load->view('templates/footer');
             $this->load->view('templates/end');

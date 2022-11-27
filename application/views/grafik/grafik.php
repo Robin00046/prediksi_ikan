@@ -12,12 +12,12 @@
                                 <div class="text-center h3">
                                     <?php echo $label ?>
                                 </div>
-                                <div class="row">
-                                        <div class="col-sm-6 col-md-4">
+                                    <div class="row">
+                                        <div class="col-sm-4 col-md-3">
                                             <div class="form-group">
                                                 <form method="get" action="<?php echo base_url("grafik")?>">
                                                     
-                                                    <select class="form-control" id="nama_produk" name="nama_produk">
+                                                    <select class="form-select" id="nama_produk" name="nama_produk">
                                                         <option selected="0">Pilih Jenis Ikan</option>
                                                         <?php foreach ($tbl_produk as $op) : ?>
                                                             <option value="<?php echo $op->nama_produk; ?>"> <?php echo $op->nama_produk; ?></option>
@@ -104,7 +104,16 @@
                 ]
             }]
         },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
         });
- 
+
   </script>
     </body>

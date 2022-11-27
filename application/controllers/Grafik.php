@@ -32,7 +32,8 @@ class Grafik extends CI_Controller
 		$data['user'] = $this->M_User->get_data();
         $data['label'] = $label;
 		$data['judul'] = 'Halaman Grafik';
-		$this->load->view('templates/main', $data);
+		$this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
 		$this->load->view('grafik/grafik',$data);
 		$this->load->view('templates/footer');
 		$this->load->view('templates/end');

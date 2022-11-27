@@ -18,7 +18,8 @@ class Transaksi extends CI_Controller
     {
         $data['transaksi'] = $this->M_Transaksi->get_data();
         $data['judul'] = 'Halaman Transaksi';
-        $this->load->view('templates/main', $data);
+        $this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
         $this->load->view('transaksi/transaksi', $data);
         $this->load->view('templates/footer');
         $this->load->view('templates/end');
@@ -67,7 +68,8 @@ class Transaksi extends CI_Controller
         $this->form_validation->set_rules('total_harga', 'total_harga', 'required');
 
         if ($this->form_validation->run() == FALSE) {
-            $this->load->view('templates/main', $data);
+            $this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
             $this->load->view('transaksi/v_ubah', $data);
             $this->load->view('templates/footer');
             $this->load->view('templates/end');
@@ -107,50 +109,75 @@ class Transaksi extends CI_Controller
             $label = 'Semua Data Transaksi';
         } else { // Jika terisi
             $transaksi = $this->M_Transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di TransaksiModel
-            $url_cetak = 'transaksi/cetak?tgl_awal=' . $tgl_awal . '&tgl_akhir=' . $tgl_akhir;
             $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
             $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
             $label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
         }
-
-
+        
+        
         $data['transaksi'] = $transaksi;
         $data['url_cetak'] = base_url('/' . $url_cetak);
         $data['label'] = $label;
         $data['judul'] = 'Transaksi Berdasarkan Tanggal';
-        $this->load->view('templates/main', $data);
+        $this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
         $this->load->view('transaksi/list', $data);
         $this->load->view('templates/footer');
         $this->load->view('templates/end');
     }
-
+    
     public function cetak()
     {
-        $tgl_awal = $this->input->get('tgl_awal'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-        $tgl_akhir = $this->input->get('tgl_akhir'); // Ambil data tgl_awal sesuai input (kalau tidak ada set kosong)
-
-        if (empty($tgl_awal) or empty($tgl_akhir)) { // Cek jika tgl_awal atau tgl_akhir kosong, maka :
-            $transaksi = $this->M_Transaksi->get_data();  // Panggil fungsi view_all yang ada di TransaksiModel
-            $label = 'Semua Data Transaksi';
+        $tgl = $this->input->get('tgl'); // Ambil data tgl sesuai input (kalau tidak ada set kosong)
+        
+        if (empty($tgl)) { // Cek jika tgl atau tgl_akhir kosong, maka :
+            $filter = $this->M_Transaksi->get_data();  // Panggil fungsi view_all yang ada di filterModel
+            $label = 'Semua Data';
         } else { // Jika terisi
-            $transaksi = $this->M_Transaksi->view_by_date($tgl_awal, $tgl_akhir);  // Panggil fungsi view_by_date yang ada di TransaksiModel
-            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
-            $label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
+            $filter = $this->M_Transaksi->filter($tgl);
+            $label = 'Filter ' . $tgl;
+            // Panggil fungsi view_by_date yang ada di filterModel
         }
-
         $data['label'] = $label;
-        $data['transaksi'] = $transaksi;
-
+        $data['filter'] = $filter;
+        
         $this->load->view('transaksi/cetak', $data);
         //     ob_start();
         //     $html = ob_get_contents();
         //     ob_end_clean();
-
+        
         //     require './assets/libraries/html2pdf/autoload.php'; // Load plugin html2pdfnya
-
+        
         //     $pdf = new Spipu\Html2Pdf\Html2Pdf('P', 'F4', 'en');  // Settingan PDFnya
         //     $pdf->WriteHTML($html);
         //     $pdf->Output('laporan.pdf', 'D');
+    }
+    public function filterdate()
+    {
+        $tgl1 = $this->input->get('tgl1'); // Ambil data tgl sesuai input (kalau tidak ada set kosong)
+        $tgl2 = $this->input->get('tgl2'); // Ambil data tgl sesuai input (kalau tidak ada set kosong)
+        
+        if (empty($tgl1) and empty($tgl2)) { // Cek jika tgl atau tgl_akhir kosong, maka :
+            $filter = $this->M_Transaksi->get_data();  // Panggil fungsi view_all yang ada di filterModel
+            $url_cetak = 'transaksi/cetak';
+            $label = 'Semua Data';
+        } else { // Jika terisi
+            $filter = $this->M_Transaksi->filter($tgl1,$tgl2);
+            $url_cetak = 'transaksi/cetak?tgl=' . $tgl1;
+            // var_dump($filter);
+            $label = 'Filter Bulan '  . $tgl1 .' Tahun '. $tgl2 ;
+            // Panggil fungsi view_by_date yang ada di filterModel
+        }
+        $data['label'] = $label;
+        $data['url_cetak'] = base_url('/' . $url_cetak);
+        $data['filter'] = $filter;
+		$data['dropdownbulan'] = $this->M_Transaksi->dropdownbulan();
+		$data['dropdowntahun'] = $this->M_Transaksi->dropdowntahun();
+		$data['judul'] = 'Halaman Filter';
+		$this->load->view('templates/main');
+        $this->load->view('templates/headers', $data);
+		$this->load->view('transaksi/filter',$data);
+		$this->load->view('templates/footer');
+		$this->load->view('templates/end');
     }
 }

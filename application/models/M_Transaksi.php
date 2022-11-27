@@ -70,4 +70,34 @@ class M_transaksi extends CI_Model
 
         return $this->db->get('transaksi')->result(); // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter
     }
+    public function filter($tgl,$tgl2)
+    {
+        $this->db->join('data_produk', 'data_produk.id_produk = transaksi.id_produk');
+        $this->db->join('user', 'user.id_user = transaksi.id_user');
+        $this->db->where("date_format(tanggal, '%M')=", $tgl);
+        $this->db->where("date_format(tanggal, '%Y')=", $tgl2);
+        
+        return $this->db->get('transaksi')->result(); // Tampilkan data transaksi sesuai tanggal yang diinput oleh user pada filter 
+    }
+    public function dropdownbulan()
+    {
+        $this->db->distinct()
+        ->select("date_format(tanggal,'%M') as bulan");
+        $query = $this->db->get('transaksi');
+        return $query->result();
+    }
+    public function dropdowntahun()
+    {
+        $this->db->distinct()
+        ->select("date_format(tanggal,'%Y') as tahun");
+        $query = $this->db->get('transaksi');
+        return $query->result();
+    }
+    public function prediksi($nama_produk)
+	{
+
+		return $this->db->query("SELECT * ,tanggal, Avg(jumlah_barang) OVER(ORDER BY id_transaksi rows between 3 PRECEDING AND CURRENT ROW) AS prediksi, Avg(jumlah_barang) OVER(ORDER BY id_transaksi rows between 6 PRECEDING AND CURRENT ROW) AS prediksin from transaksi
+        join data_produk on data_produk.id_produk = transaksi.id_produk
+        where nama_produk= '$nama_produk' ORDER BY tanggal DESC")->result();
+	}
 }

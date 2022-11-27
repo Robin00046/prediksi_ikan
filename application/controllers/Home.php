@@ -12,8 +12,9 @@ class Home extends CI_Controller
 	}
     public function index()
     {
-        $data['judul'] = 'Halaman Utama';
-        $this->load->view('templates/main', $data);
+        $data['judul'] = 'Tes';
+        $this->load->view('templates/main');
+        // $this->load->view('templates/headers', $data);
         $this->load->view('home/home');
         $this->load->view('templates/footer');
         $this->load->view('templates/end');
