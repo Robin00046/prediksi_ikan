@@ -11,7 +11,7 @@
         <?php endif; ?>
         <div class="row mb-3">
             <div class="col-md-6">
-                <a href="<?= base_url('produk/tambah') ?>" class="btn btn-primary">Tambah Data</a>
+                <a href="<?= base_url('Produk/tambah') ?>" class="btn btn-primary">Tambah Data</a>
             </div>
         </div>
         <table id="datatable" class="display" style="width:100%">
@@ -38,8 +38,8 @@
                         <td><?= $produk->satuan; ?></td>
                         <td><?= $produk->total_stok; ?></td>
                         <td>
-                            <a class="btn btn-warning" href="<?= base_url() . 'produk/ubah/' . $produk->id_produk  ?>"><i class="bi bi-pencil"></i></a>
-                            <a class="btn btn-danger" onclick="return confirm('Yakin ? ');" href="<?= base_url() . 'produk/hapus/' . $produk->id_produk  ?>" class="btn btn-small text-danger"><i class="bi bi-trash"></i></a>
+                            <a class="btn btn-warning" href="<?= base_url() . 'Produk/ubah/' . $produk->id_produk  ?>"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-danger" onclick="return confirm('Yakin ? ');" href="<?= base_url() . 'Produk/hapus/' . $produk->id_produk  ?>" class="btn btn-small text-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach ?>

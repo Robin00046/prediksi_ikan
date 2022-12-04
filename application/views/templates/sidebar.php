@@ -11,9 +11,9 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a <?php if($this->uri->segment(1)=="produk"){echo 'class="nav-link"';}else {
+                <a <?php if($this->uri->segment(1)=="Produk"){echo 'class="nav-link"';}else {
                     echo 'class="nav-link collapsed"';
-                }?> href="<?= base_url('produk')  ?>">
+                }?> href="<?= base_url('Produk')  ?>">
                     <i class="bi bi-box-fill"></i>
                     <span>Produk</span>
                 </a>

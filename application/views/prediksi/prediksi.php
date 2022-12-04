@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="form-group">
-                    <form method="get" action="<?php echo base_url("prediksi")?>">
+                    <form method="get" action="<?php echo base_url("Prediksi")?>">
                         
                         <select class="form-select" id="nama_produk" name="nama_produk">
                             <option selected="0">Pilih Jenis Ikan</option>
@@ -27,7 +27,7 @@
                     <input type="submit" name="filter" class="btn btn-primary mt-3 mb-3" value="Cari"> 
                     <?php
                         if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
-                            echo '<a href="' . base_url('prediksi') . '" class="btn btn-info">RESET</a>';
+                            echo '<a href="' . base_url('Prediksi') . '" class="btn btn-info">RESET</a>';
                     ?>
                     </form>
                 </div>

@@ -40,6 +40,7 @@ class Prediksi extends CI_Controller
         $this->load->view('templates/footer');
         $this->load->view('templates/end');
     }
+    
     public function tambah()
     {
         $data['judul'] = "Halaman Tambah";

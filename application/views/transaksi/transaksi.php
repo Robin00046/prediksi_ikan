@@ -11,7 +11,7 @@
         <?php endif; ?>
         <div class="row mb-3">
             <div class="col-md-6">
-                <a href="<?= base_url('transaksi/tambah') ?>" class="btn btn-primary">Tambah Data</a>
+                <a href="<?= base_url('Transaksi/tambah') ?>" class="btn btn-primary">Tambah Data</a>
             </div>
         </div>
         <table id="datatable" class="display" style="width:100%">
@@ -39,8 +39,8 @@
                         <td><?= $tanggal; ?></td>
                         <td>Rp. <?= number_format($transaksi->total_harga,2,',','.'); ?></td>
                         <td>
-                            <a class="btn btn-warning" href="<?= base_url() . 'transaksi/ubah/' . $transaksi->id_transaksi  ?>"><i class="bi bi-pencil"></i></a>
-                            <a class="btn btn-danger" onclick="return confirm('Yakin ? ');" href="<?= base_url() . 'transaksi/hapus/' . $transaksi->id_transaksi  ?>" class="btn btn-small text-danger"><i class="bi bi-trash"></i></a>
+                            <a class="btn btn-warning" href="<?= base_url() . 'Transaksi/ubah/' . $transaksi->id_transaksi  ?>"><i class="bi bi-pencil"></i></a>
+                            <a class="btn btn-danger" onclick="return confirm('Yakin ? ');" href="<?= base_url() . 'Transaksi/hapus/' . $transaksi->id_transaksi  ?>" class="btn btn-small text-danger"><i class="bi bi-trash"></i></a>
                         </td>
                     </tr>
                 <?php endforeach ?>

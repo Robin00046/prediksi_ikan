@@ -12,7 +12,7 @@
                                 <div class="text-center h3">
                                     <?php echo $label ?>
                                 </div>
-                                <form method="get" action="<?php echo base_url('transaksi/filter') ?>">
+                                <form method="get" action="<?php echo base_url('laporan') ?>">
                                     <div class="row">
                                         <div class="col-sm-6 col-md-4">
                                             <div class="form-group">
@@ -30,7 +30,7 @@
                                     <button type="submit" name="filter" value="true" class="btn btn-primary">TAMPILKAN</button>
                                     <?php
                                     if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
-                                        echo '<a href="' . base_url('transaksi/filter') . '" class="btn btn-info">RESET</a>';
+                                        echo '<a href="' . base_url('laporan') . '" class="btn btn-info">RESET</a>';
                                     ?>
                                 </form>
                                 <table class="table table-bordered" id="Table" width="100%" cellspacing="0">

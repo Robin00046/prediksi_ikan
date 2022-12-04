@@ -15,7 +15,7 @@
                         <div class="row">
                                 <div class="col-sm-6 col-md-4">
                                     <div class="form-group">
-                                        <form method="get" action="<?php echo base_url("transaksi/filterdate")?>">
+                                        <form method="get" action="<?php echo base_url("Laporan")?>">
                                         <div class="row">
                                             
                                             <div class="col-sm-6 col-md-6">
@@ -38,7 +38,7 @@
                                         <input type="submit" name="filter" class="btn btn-primary mt-3 mb-3" value="Tampilkan"> 
                                         <?php
                                             if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
-                                                echo '<a href="' . base_url('transaksi/filterdate') . '" class="btn btn-info">RESET</a>';
+                                                echo '<a href="' . base_url('Laporan') . '" class="btn btn-info">RESET</a>';
                                         ?>
                                         </form>
                                     </div>
