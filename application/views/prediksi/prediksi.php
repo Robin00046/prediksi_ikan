@@ -33,38 +33,42 @@
                 </div>
             </div>
         </div>
-        <table id="datatable" class="display" style="width:100%">
+        <?php 
+        if ($produk==null) {
+            // echo('tes');
+        } else {
+            ?>
+            <table class="table table-bordered" style="width:100%">
             <thead>
                 <tr>
                     <th>#</th>
                     <th>Nama Produk</th>
                     <th>Jumlah Penjualan</th>
                     <th>Bulan Prediksi</th>
-                    <th>Hasil Prediksi 3 Bulan</th>
-                    <th>Hasil Prediksi 6 Bulan</th>
+                    <th>Hasil Prediksi <?=date('F Y', strtotime($prediksi->tanggal_bulan_depan))?></th>
                 </tr>
             </thead>
             <tbody>
             <?php
                 if (empty($prediksi)) { // Jika data tidak ada
                     echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
-                } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada)
-                    $no = 1;
-                    foreach ($prediksi as $data) { // Looping hasil data filter
-                        $tanggal = date('F Y', strtotime($data->tanggal)); // Ubah format tanggal jadi dd-mm-yyyy
-                        
-                        echo "<tr>";
-                        echo "<td>" . $no++ . "</td>";
-                        echo "<td>" . $data->nama_produk . "</td>";
-                        echo "<td>" . $data->jumlah_barang . "</td>";
-                        echo "<td>" . $tanggal . "</td>";
-                        echo "<td>" . $data->prediksi . "</td>";
-                        echo "<td>" . $data->prediksin . "</td>";
-                        echo "</tr>";
+                } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada) // Ubah format tanggal jadi dd-mm-yyyy
+                    ?>
+                        <tr>
+                            <td> 1</td>
+                            <td> <?=$prediksi->nama_produk?> </td>
+                            <td> <?=$prediksi->jumlah_barang?> </td>
+                            <td> <?=date('F Y', strtotime($prediksi->tanggal))?> </td>
+                            <td> <?=number_format($prediksi->prediksi)?> </td>
+                            </tr>
+                        <?php 
                     }
-                }
                 ?>
             </tbody>
-        </table>
+        </table>  
+            <?php
+        }
+        ?>
+        
     </div>
 </section>

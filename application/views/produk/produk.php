@@ -45,10 +45,9 @@
                 <?php endforeach ?>
             </tbody>
         </table>
-        <div class="container">
     <canvas id="myChart"></canvas>
     </div>
- 
+</section>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   <script type="text/javascript">
     var ctx = document.getElementById('myChart').getContext('2d');
@@ -91,5 +90,3 @@
     );
     
   </script>
-    </div>
-</section>

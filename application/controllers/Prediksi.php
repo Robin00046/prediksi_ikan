@@ -33,6 +33,7 @@ class Prediksi extends CI_Controller
         $data['tbl_produk'] = $this->M_Produk->get_data();
         $data['label'] = $label;
 		$data['judul'] = 'Halaman Prediksi';
+		$data['produk'] = $nama_produk;
         // var_dump($data['prediksi']);
         $this->load->view('templates/main');
         $this->load->view('templates/headers', $data);
