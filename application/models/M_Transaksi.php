@@ -93,29 +93,38 @@ class M_transaksi extends CI_Model
         $query = $this->db->get('transaksi');
         return $query->result();
     }
-    public function prediksi($nama_produk)
-	{
-
-		return $this->db->query("SELECT * ,tanggal, Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW) AS prediksi,tanggal+ INTERVAL '1' MONTH as tanggal_bulan_depan 
-         from transaksi
-        join data_produk on data_produk.id_produk = transaksi.id_produk
-        where nama_produk= '$nama_produk' 
-        ORDER BY tanggal DESC
-        LIMIT 1")->row();
-	}
     // public function prediksi($nama_produk)
 	// {
 
-	// 	return $this->db->query("SELECT * ,tanggal, Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW) AS prediksi, 
-    //     Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 5 PRECEDING AND CURRENT ROW) AS prediksin,
-    //     Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 11 PRECEDING AND CURRENT ROW) AS prediksinn,
-    //     ceil(((jumlah_barang - Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW)) / jumlah_barang) * 100) as mape, 
-	// 	ceil(((jumlah_barang - Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 5 PRECEDING AND CURRENT ROW)) / jumlah_barang) * 100) as mapep, 
-	// 	ceil(((jumlah_barang - Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 11 PRECEDING AND CURRENT ROW)) / jumlah_barang) * 100) as mapepp 
+	// 	return $this->db->query("SELECT * ,tanggal, Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW) AS prediksi,tanggal+ INTERVAL '1' MONTH as tanggal_bulan_depan 
     //      from transaksi
     //     join data_produk on data_produk.id_produk = transaksi.id_produk
     //     where nama_produk= '$nama_produk' 
     //     ORDER BY tanggal DESC
     //     LIMIT 1")->row();
 	// }
+    public function prediksi($nama_produk)
+	{
+
+		return $this->db->query("SELECT * ,tanggal, Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW) AS prediksi, 
+        Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 5 PRECEDING AND CURRENT ROW) AS prediksin,
+        Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 11 PRECEDING AND CURRENT ROW) AS prediksinn,
+        ceil(((jumlah_barang - Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW)) / jumlah_barang) * 100) as mape, 
+		ceil(((jumlah_barang - Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 5 PRECEDING AND CURRENT ROW)) / jumlah_barang) * 100) as mapep, 
+		ceil(((jumlah_barang - Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 11 PRECEDING AND CURRENT ROW)) / jumlah_barang) * 100) as mapepp 
+         from transaksi
+        join data_produk on data_produk.id_produk = transaksi.id_produk
+        where nama_produk= '$nama_produk' 
+        ORDER BY tanggal DESC")->result();
+	}
+    public function prediksi_get($id)
+	{
+
+		return $this->db->query("SELECT * ,tanggal, Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW) AS prediksi, 
+        ceil(((jumlah_barang - Avg(jumlah_barang) OVER(ORDER BY tanggal ASC rows between 2 PRECEDING AND CURRENT ROW)) / jumlah_barang) * 100) as mape
+         from transaksi
+        join data_produk on data_produk.id_produk = transaksi.id_produk
+        where transaksi.id_produk= '$id' 
+        ORDER BY tanggal DESC")->result();
+	}
 }

@@ -50,6 +50,14 @@
                     <span>Laporan</span>
                 </a>
             </li>
+            <li class="nav-item">
+                <a <?php if($this->uri->segment(1)=="Laporan2"){echo 'class="nav-link"';}else {
+                    echo 'class="nav-link collapsed"';
+                }?> href="<?= base_url('Laporan2')  ?>">
+                    <i class="bi bi-clipboard-pulse"></i>
+                    <span>Laporan2</span>
+                </a>
+            </li>
         </ul>
 
     </aside><!-- End Sidebar-->

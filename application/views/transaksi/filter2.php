@@ -15,7 +15,7 @@
         <div class="row">
             <div class="col-sm-4 col-md-3">
                 <div class="form-group">
-                    <form method="get" action="<?php echo base_url("Prediksi")?>">
+                    <form method="get" action="<?php echo base_url("Laporan2")?>">
                         
                         <select class="form-select" id="nama_produk" name="nama_produk">
                             <option selected="0">Pilih Jenis Ikan</option>
@@ -27,7 +27,7 @@
                     <input type="submit" name="filter" class="btn btn-primary mt-3 mb-3" value="Cari"> 
                     <?php
                         if (isset($_GET['filter'])) // Jika user mengisi filter tanggal, maka munculkan tombol untuk reset filter
-                            echo '<a href="' . base_url('Prediksi') . '" class="btn btn-info">RESET</a>';
+                            echo '<a href="' . base_url('Laporan2') . '" class="btn btn-info">RESET</a>';
                     ?>
                     </form>
                 </div>
@@ -52,12 +52,7 @@
             <tbody>
             <?php
                 if (empty($prediksi)) { // Jika data tidak ada
-                    ?>
-                    <tr><td colspan='5'>Data tidak ada</td></tr>
-                    
-                    <?php
-                    // echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
-                    
+                    echo "<tr><td colspan='5'>Data tidak ada</td></tr>";
                 } else { // Jika jumlah data lebih dari 0 (Berarti jika data ada) // Ubah format tanggal jadi dd-mm-yyyy
                     ?>
                     <?php
@@ -75,13 +70,12 @@
                             <?php
                             endforeach
                             ?>
-                            <a href="<?= base_url() . 'Prediksi/tambah_prediski/' . $value->id_produk  ?>" class="btn btn-primary btn-sm">Tambah Data</a>
                         <?php 
                     }
                 ?>
             </tbody>
         </table>  
-        
+        <a target="_blank" href="<?php echo $url_cetak ?>" class="btn btn-info" style=' font-size:17px;'><i class="bi bi-printer" style=' font-size:17px;'></i> Cetak PDF</a>
             <?php
         }
         ?>

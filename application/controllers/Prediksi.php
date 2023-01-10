@@ -94,4 +94,22 @@ class Prediksi extends CI_Controller
             redirect('prediksi');
         }
     }
+    public function tambah_prediski($id)
+    {
+        $this->db->delete('prediksi', array('data_produk_fk' => $id));
+        $prediksi = $this->M_Transaksi->prediksi_get($id);
+        // dd($value->id_produk);
+        foreach ($prediksi as $value) :
+        $data = array(
+            'data_produk_fk' => $value->id_produk,
+            'jumlah_penjualan' => $value->jumlah_barang,
+            'bulan_prediksi' => $value->tanggal,
+            'hasil_prediksi' => $value->prediksi,
+            'mape' => $value->mape
+    );
+    
+    $this->db->insert('prediksi', $data);
+endforeach;
+    redirect('Prediksi');
+    }
 }
