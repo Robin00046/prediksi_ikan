@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Nov 20, 2022 at 02:41 AM
+-- Generation Time: Jan 12, 2023 at 11:14 PM
 -- Server version: 8.0.30
--- PHP Version: 7.4.33
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -41,9 +41,9 @@ CREATE TABLE `data_produk` (
 --
 
 INSERT INTO `data_produk` (`id_produk`, `nama_produk`, `jenis_produk`, `harga`, `satuan`, `total_stok`) VALUES
-(1, 'Cupang', 'Ikan', 50000, 'pcs', 100),
+(1, 'Cupang', 'Ikan', 50000, 'pcs', 41),
 (2, 'pari 1', 'ikan', 50000, 'pcs', 150),
-(3, 'ppp', 'pdk', 3000, 'pcs', 15);
+(3, 'ppp', 'pdk', 3000, 'pcs', 0);
 
 -- --------------------------------------------------------
 
@@ -52,21 +52,25 @@ INSERT INTO `data_produk` (`id_produk`, `nama_produk`, `jenis_produk`, `harga`, 
 --
 
 CREATE TABLE `prediksi` (
-  `id_prediksi` int NOT NULL,
-  `bulan1` varchar(45) DEFAULT NULL,
-  `bulan2` varchar(45) DEFAULT NULL,
-  `bulan3` varchar(45) DEFAULT NULL,
-  `hasil` varchar(45) DEFAULT NULL,
-  `id_user` int NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `id` int NOT NULL,
+  `data_produk_fk` int NOT NULL,
+  `jumlah_penjualan` int NOT NULL,
+  `bulan_prediksi` date NOT NULL,
+  `hasil_prediksi` int NOT NULL,
+  `mape` varchar(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `prediksi`
 --
 
-INSERT INTO `prediksi` (`id_prediksi`, `bulan1`, `bulan2`, `bulan3`, `hasil`, `id_user`) VALUES
-(1, '200000', '200000', '200000', '200000', 1),
-(3, '250000', '250000', '450000', '316667', 1);
+INSERT INTO `prediksi` (`id`, `data_produk_fk`, `jumlah_penjualan`, `bulan_prediksi`, `hasil_prediksi`, `mape`) VALUES
+(3, 3, 15, '2022-12-21', 15, '0'),
+(10, 1, 11, '2022-12-01', 12, '-6'),
+(11, 1, 12, '2022-11-02', 9, '25'),
+(12, 1, 12, '2022-10-01', 9, '25'),
+(13, 1, 3, '2022-09-30', 8, '-150'),
+(14, 1, 12, '2022-08-01', 12, '0');
 
 -- --------------------------------------------------------
 
@@ -88,11 +92,12 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id_transaksi`, `total_harga`, `tanggal`, `id_user`, `jumlah_barang`, `id_produk`) VALUES
-(2, 45000, '2022-10-01', 1, 15, 3),
+(2, 45000, '2022-12-21', 1, 15, 3),
 (3, 150000, '2022-09-30', 1, 3, 1),
-(5, 600000, '2022-10-01', 1, 12, 1),
-(6, 600000, '2022-10-01', 1, 12, 1),
-(7, 600000, '2022-10-01', 1, 12, 1);
+(5, 600000, '2022-08-01', 1, 12, 1),
+(6, 600000, '2022-11-02', 1, 12, 1),
+(7, 600000, '2022-10-01', 1, 12, 1),
+(11, 550000, '2022-12-01', 1, 11, 1);
 
 -- --------------------------------------------------------
 
@@ -112,7 +117,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `nama`, `username`, `password`) VALUES
-(1, 'supardi', 'admin', 'admin');
+(1, 'supardi', 'admin', '21232f297a57a5a743894a0e4a801fc3');
 
 --
 -- Indexes for dumped tables
@@ -128,8 +133,8 @@ ALTER TABLE `data_produk`
 -- Indexes for table `prediksi`
 --
 ALTER TABLE `prediksi`
-  ADD PRIMARY KEY (`id_prediksi`),
-  ADD KEY `fk_prediksi_user1_idx` (`id_user`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `data_produk_fk` (`data_produk_fk`);
 
 --
 -- Indexes for table `transaksi`
@@ -159,13 +164,13 @@ ALTER TABLE `data_produk`
 -- AUTO_INCREMENT for table `prediksi`
 --
 ALTER TABLE `prediksi`
-  MODIFY `id_prediksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_transaksi` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -181,7 +186,7 @@ ALTER TABLE `user`
 -- Constraints for table `prediksi`
 --
 ALTER TABLE `prediksi`
-  ADD CONSTRAINT `fk_prediksi_user1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`);
+  ADD CONSTRAINT `prediksi_ibfk_1` FOREIGN KEY (`data_produk_fk`) REFERENCES `data_produk` (`id_produk`);
 
 --
 -- Constraints for table `transaksi`
